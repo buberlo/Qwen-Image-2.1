@@ -1,0 +1,4 @@
+// Copy this file to Signing.xcconfig; select your existing developer team in Xcode.
+DEVELOPMENT_TEAM =
+// Use your own unique identifier if the default is unavailable to your team.
+PRODUCT_BUNDLE_IDENTIFIER = com.personal.qwenoffline

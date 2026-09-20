@@ -1,0 +1,53 @@
+name: QwenOffline
+options:
+  deploymentTarget:
+    iOS: "27.0"
+  createIntermediateGroups: true
+  defaultConfig: Debug
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    SWIFT_OBJC_BRIDGING_HEADER: Native/include/QwenBridge.h
+    HEADER_SEARCH_PATHS: "$(SRCROOT)/Native/include"
+    LIBRARY_SEARCH_PATHS: "$(SRCROOT)/build/$(PLATFORM_NAME)"
+    OTHER_LDFLAGS: "$(inherited) -lQwenNative -lc++ -framework Metal -framework MetalKit -framework Accelerate"
+    CLANG_CXX_LANGUAGE_STANDARD: c++17
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ARCHS: arm64
+    SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+    SUPPORTS_MACCATALYST: NO
+configFiles:
+  Debug: Signing.xcconfig
+  Release: Signing.xcconfig
+targets:
+  QwenOffline:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes: [Resources]
+      - path: App/Resources
+        buildPhase: resources
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Qwen Offline
+        UILaunchScreen: {}
+        NSPhotoLibraryAddUsageDescription: Save images you create to your photo library.
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UIApplicationSupportsIndirectInputEvents: true
+    preBuildScripts:
+      - name: Build pinned Metal runtime
+        script: '"$SRCROOT/Scripts/build-native.sh" "$PLATFORM_NAME"'
+        basedOnDependencyAnalysis: false
+schemes:
+  QwenOffline:
+    build:
+      targets:
+        QwenOffline: all
+    run:
+      config: Debug

@@ -1,0 +1,14 @@
+.DS_Store
+.build/
+build/
+vendor/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+Signing.xcconfig
+*.gguf
+*.safetensors
+
+# Local duplicate copies; canonical project and plist are versioned.
+QwenOffline 2.xcodeproj/
+App/Info 2.plist
