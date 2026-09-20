@@ -28,3 +28,7 @@ Verify download speed/progress, pause/resume, checksum validation, model setup, 
 An opaque 1024-square original icon is included. PrivacyInfo.xcprivacy declares file metadata for app-container files, uptime for elapsed-time measurement, and disk-space checks before model installation. It declares no tracking or developer data collection. The source policy separately describes third-party model downloads and user-directed exports; confirm App Store Connect disclosures against Apple's current definitions before publishing.
 
 Use DerivedData and archives outside synced Documents folders. Signing details remain in ignored Signing.xcconfig. Pass PRODUCT_BUNDLE_IDENTIFIER=com.buberlo.pocketcanvas when archiving for App Store Connect so the personal-device configuration remains intact.
+
+## Upload record — 2026-09-21
+
+App Store Connect app 6814293165 was created. Xcode archive and upload succeeded for 0.1.0 (2); Apple reported the uploaded package was processing. Beta description, repository URL, and privacy policy URL were saved in TestFlight. This is not an App Store release or a completed physical-device feasibility test.
