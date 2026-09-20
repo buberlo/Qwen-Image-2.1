@@ -52,10 +52,15 @@ enum FileIntegrity {
         let handle = try FileHandle(forReadingFrom: url)
         defer { try? handle.close() }
         var hash = SHA256()
-        while let data = try handle.read(upToCount: 4 * 1024 * 1024), !data.isEmpty {
+        // FileHandle bridges through autoreleased NSData. On an actor worker,
+        // the outer pool can outlive this entire multi-GB verification loop.
+        // Drain after every chunk, keeping both the read and hashing in the pool.
+        while try autoreleasepool(invoking: {
             try Task.checkCancellation()
+            guard let data = try handle.read(upToCount: 4 * 1024 * 1024), !data.isEmpty else { return false }
             hash.update(data: data)
-        }
+            return true
+        }) {}
         let digest = hash.finalize().map { String(format: "%02x", $0) }.joined()
         guard digest == file.sha256 else { throw QwenError.message("Checksum mismatch: \(file.name). Download this file again.") }
     }

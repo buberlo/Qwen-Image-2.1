@@ -26,3 +26,11 @@ Cancellation is cooperative. Upstream offers generation cancellation but no canc
 - Real-device download interruption, insufficient-storage, thermal/background behavior, Photos export, and airplane-mode acceptance still require the procedure in DEVICE_VALIDATION.md.
 
 The implementation is an experimental prototype and harness, **not a completed feasibility proof**. If actual-device tests fail, preserve measurements and report the limits instead of substituting a model or service.
+
+## Download verification memory fix — build 3
+
+Phone Jetsam reports identified QwenOffline terminations with `per-process-limit`. The first diffusion download remained in its partial file at approximately 3.91 GiB, consistent with entering verification after completing the first component. A standalone reproduction of the checksum loop used approximately 542 MB peak footprint for a 512 MiB file: Foundation read buffers were autoreleased but the long-running loop did not drain them.
+
+The verifier now drains an autorelease pool after each 4 MiB read and hash update. A valid 5 GiB sparse-file checksum regression passed with 11.4 MiB peak RSS on this Mac, below its 128 MiB guard. This verifies bounded checksum memory, not inference feasibility. Existing model file names and resume offsets are unchanged.
+
+Run `./Scripts/check-checksum-memory.sh` to reproduce the large-file regression. A completed installation on the phone after the fix remains to be confirmed.
