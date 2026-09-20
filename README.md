@@ -1,10 +1,26 @@
 # Pocket Canvas for iPhone
 
-Free research/evaluation beta for **Qwen-Image-2.1**, targeting the standard iPhone 16 on iOS 27. SwiftUI UI, local Metal inference, one reference-photo edit, local history, Photos export, and resumable model installation.
+Experimental research/evaluation app for **Qwen-Image-2.1**, targeting the standard iPhone 16 on iOS 27. SwiftUI UI, local Metal inference, one reference-photo edit, local history, Photos export, and resumable model installation.
 
 **Device feasibility is not established.** The native library builds and links on Apple Silicon macOS, and the signed Release app builds with Xcode 27 / iOS 27 SDK and has been installed and launched on a physical iPhone 16 over Wi-Fi. Real image generation, timing, quality, and memory survival remain unverified. There is no remote inference or substitute model.
 
-The beta is named **Pocket Canvas**. The repository and internal Xcode target retain their original names. See [beta distribution notes](docs/APP_STORE_CONNECT.md) and the [privacy policy](docs/PRIVACY.md).
+The app is named **Pocket Canvas**. The repository and internal Xcode target retain their original names. See [App Store submission notes](docs/APP_STORE_CONNECT.md) and the [privacy policy](docs/PRIVACY.md).
+
+## Current status — September 21, 2026
+
+| Area | Verified status |
+| --- | --- |
+| Latest source and personal-device build | 0.1.0 (3), installed and launched on iPhone 16 |
+| Download crash fix | Checksum buffers now released after every 4 MiB chunk; existing partial downloads preserved |
+| Large-file regression | Valid 5 GiB checksum passed with 11.4 MiB peak RSS on the development Mac |
+| Full model installation and inference | Still awaiting physical-device completion and validation |
+| App Store Connect | Build 2 attached to a direct App Store draft; not submitted or publicly available |
+
+**Build 2 still contains the checksum memory bug.** Build 3 must be archived, uploaded, and selected before App Review. TestFlight distribution is not part of the current release plan.
+
+If an older build closed near the first 4–5 GB of setup, update the same installed app and choose **Model → Download / resume model**. Do not delete the app or its model files: completed download chunks can be reused. Verification reads the saved file locally and is distinct from network downloading. Completing this regression does not establish that the image model fits in iPhone memory.
+
+See the [changelog](CHANGELOG.md) for fixes and the [device acceptance procedure](docs/DEVICE_VALIDATION.md) for outstanding tests.
 
 ## Open and run
 
@@ -33,11 +49,14 @@ The beta is named **Pocket Canvas**. The repository and internal Xcode target re
 
 ```sh
 ./Scripts/check.sh
+./Scripts/check-checksum-memory.sh
 ./Scripts/build-native.sh macosx
 ctest --test-dir build/macosx --output-on-failure
 ```
 
 `check.sh` compiles and runs nine Foundation/CryptoKit checks, parses the app Swift sources, and verifies resource membership. The test runner deliberately does not require XCTest, which is absent from Command Line Tools. Parsing is **not** an iOS typecheck or UI test.
+
+`check-checksum-memory.sh` verifies a 5 GiB sparse file in a separate process and enforces a peak RSS below 128 MiB. It uses local zero-filled test data, not downloaded model weights. Its memory measurements are from macOS, not the iPhone.
 
 The native smoke test verifies linking, early cancellation, cleanup, and memory telemetry without downloading weights. macOS native verification is a build check, not a Mac inference fallback.
 

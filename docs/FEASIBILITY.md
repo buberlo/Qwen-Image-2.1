@@ -21,7 +21,7 @@ Cancellation is cooperative. Upstream offers generation cancellation but no canc
 ## Device deployment and remaining validation
 
 - A signed Release build was installed and launched successfully on a physical iPhone 16 running iOS 27 over Wi-Fi. Signing configuration remains in the ignored local `Signing.xcconfig`.
-- The latest update adds live download speed, received bytes, and a waiting indicator. It passed the nine core checks and signed Release build, and was installed and launched on the phone.
+- Build 3 retains live download speed and activity indicators and fixes checksum buffer retention. It passed the nine core checks, the 5 GiB checksum memory regression, and the signed Release build. It was installed and launched over the existing personal-device app; the approximately 3.91 GiB saved partial file remained present.
 - No real-model output, quality assessment, performance timing, or iPhone memory feasibility result is claimed.
 - Real-device download interruption, insufficient-storage, thermal/background behavior, Photos export, and airplane-mode acceptance still require the procedure in DEVICE_VALIDATION.md.
 
