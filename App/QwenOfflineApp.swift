@@ -30,7 +30,7 @@ struct RootView: View {
             if phase == .background { model.backgrounded() }
             if phase == .active { model.foregrounded() }
         }
-        .alert("Qwen Offline", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
+        .alert("Pocket Canvas", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
             Button("OK") { model.error = nil }
         } message: { Text(model.error ?? "") }
     }

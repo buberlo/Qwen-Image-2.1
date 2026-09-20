@@ -59,7 +59,7 @@ struct CreateView: View {
                         .font(.footnote).foregroundStyle(.secondary)
                 }.padding(24)
             }
-            .navigationTitle("Qwen Offline").navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Pocket Canvas").navigationBarTitleDisplayMode(.inline)
             .onChange(of: photo) { _, item in
                 Task {
                     do { if let data = try await item?.loadTransferable(type: Data.self) { await model.setReference(data: data) } }

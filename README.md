@@ -1,8 +1,10 @@
-# Qwen Offline for iPhone
+# Pocket Canvas for iPhone
 
-Experimental personal iPhone app for **Qwen-Image-2.1**, targeting the standard iPhone 16 on iOS 27. SwiftUI UI, local Metal inference, one reference-photo edit, local history, Photos export, and resumable model installation.
+Free research/evaluation beta for **Qwen-Image-2.1**, targeting the standard iPhone 16 on iOS 27. SwiftUI UI, local Metal inference, one reference-photo edit, local history, Photos export, and resumable model installation.
 
 **Device feasibility is not established.** The native library builds and links on Apple Silicon macOS, and the signed Release app builds with Xcode 27 / iOS 27 SDK and has been installed and launched on a physical iPhone 16 over Wi-Fi. Real image generation, timing, quality, and memory survival remain unverified. There is no remote inference or substitute model.
+
+The beta is named **Pocket Canvas**. The repository and internal Xcode target retain their original names. See [beta distribution notes](docs/APP_STORE_CONNECT.md) and the [privacy policy](docs/PRIVACY.md).
 
 ## Open and run
 
@@ -54,7 +56,7 @@ Then build/run on the actual phone with your signing team. Simulator results can
 - Background expiration requests cancellation, but iOS can suspend or terminate the app before native cleanup completes. The app does not advertise background generation.
 - The 512-square starting resolution, tiled VAE behavior, Metal operator coverage, and actual quality need device validation. No automatic reduction in model or precision is hidden behind failures.
 - The device suite checks six completions, cancellation at step two, and successful restart. Prompt-following and preservation of the edited subject require human inspection. Export the run report and correlate its `resultID` values with History.
-- No App Store/TestFlight packaging, multi-reference editing, mask painting, transparent output controls, or upscaling in this version.
+- No multi-reference editing, mask painting, transparent output controls, or upscaling in this version. App Store Connect packaging is prepared for evaluation; this is not a validated consumer release.
 
 Apple documents wireless pairing in [Device Hub](https://developer.apple.com/documentation/xcode/managing-your-simulated-and-physical-devices-in-device-hub).
 

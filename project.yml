@@ -16,7 +16,8 @@ settings:
     OTHER_LDFLAGS: "$(inherited) -lQwenNative -lc++ -framework Metal -framework MetalKit -framework Accelerate"
     CLANG_CXX_LANGUAGE_STANDARD: c++17
     MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    CURRENT_PROJECT_VERSION: "2"
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     ARCHS: arm64
     SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
     SUPPORTS_MACCATALYST: NO
@@ -29,13 +30,15 @@ targets:
     platform: iOS
     sources:
       - path: App
-        excludes: [Resources]
+        excludes: [Resources, "Info 2.plist"]
       - path: App/Resources
         buildPhase: resources
     info:
       path: App/Info.plist
       properties:
-        CFBundleDisplayName: Qwen Offline
+        CFBundleDisplayName: Pocket Canvas
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
         NSPhotoLibraryAddUsageDescription: Save images you create to your photo library.
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]

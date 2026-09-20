@@ -17,22 +17,26 @@
 		7C33A341E21E42F92C011CF0 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AEBD160E7C2BD212C2F8EE /* HistoryStore.swift */; };
 		833C258CC442044F5C45018A /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F3A622CAAECDB339B52D1 /* Views.swift */; };
 		8798E86E021B5F45513EA9AF /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47E5C72A958A2389E942B0 /* AppModel.swift */; };
+		D38A3AE1818AF5715C557101 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B3342784D1C509FE6AA162CB /* PrivacyInfo.xcprivacy */; };
+		FE7A700ED8E9AB6D53522EFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DC864C614DBB2F9520BEDC1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F9E7A841460C10EEACE1DA4 /* ModelManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManifest.swift; sourceTree = "<group>"; };
 		14E3AB0A02F9FEC816A40633 /* NOTICES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTICES.txt; sourceTree = "<group>"; };
+		1DC864C614DBB2F9520BEDC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		248E0BAD871BBF856B505C79 /* InferenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceEngine.swift; sourceTree = "<group>"; };
 		27BD98077EB8DD82CF6757CB /* ModelInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelInstaller.swift; sourceTree = "<group>"; };
 		3F47E5C72A958A2389E942B0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		41AEBD160E7C2BD212C2F8EE /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		709ACC1411C64DA6825A0BF8 /* Models.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Models.json; sourceTree = "<group>"; };
+		B3342784D1C509FE6AA162CB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B721ED05C491A8823A59F2AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BCF325237C71714A6AA76CFF /* QwenOfflineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwenOfflineApp.swift; sourceTree = "<group>"; };
 		DB5E3BC1E639DABA9E63039E /* QwenOffline.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QwenOffline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CEC4C8FA002C94ABB5CB37 /* Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		F30F3A622CAAECDB339B52D1 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		"TEMP_C32863B2-B2E9-49AF-B5F4-C64F5D38812A" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_6906A720-AB7D-49A2-9D5B-27C974B4017D" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -80,16 +84,18 @@
 		FD3A7DD458F290691B7B9A86 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1DC864C614DBB2F9520BEDC1 /* Assets.xcassets */,
 				709ACC1411C64DA6825A0BF8 /* Models.json */,
 				14E3AB0A02F9FEC816A40633 /* NOTICES.txt */,
+				B3342784D1C509FE6AA162CB /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		"TEMP_3EE6A3FB-ECC8-46DC-86BF-E7CA4A6813CD" /* Qwen-Image-2.1 */ = {
+		"TEMP_CC528B9F-D470-4882-9365-D094298EE61D" /* Qwen-Image-2.1 */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_C32863B2-B2E9-49AF-B5F4-C64F5D38812A" /* Signing.xcconfig */,
+				"TEMP_6906A720-AB7D-49A2-9D5B-27C974B4017D" /* Signing.xcconfig */,
 			);
 			path = "Qwen-Image-2.1";
 			sourceTree = "<group>";
@@ -126,7 +132,7 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					CACA1855868084222152BB95 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = K5TW9AU245;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -155,8 +161,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE7A700ED8E9AB6D53522EFC /* Assets.xcassets in Resources */,
 				4F1D7128112D4D46B50C978C /* Models.json in Resources */,
 				443E84084B43B5FB55D2C976 /* NOTICES.txt in Resources */,
+				D38A3AE1818AF5715C557101 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,10 +228,11 @@
 		};
 		9FC93A01A4008584A8CDE6AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_C32863B2-B2E9-49AF-B5F4-C64F5D38812A" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_6906A720-AB7D-49A2-9D5B-27C974B4017D" /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
@@ -255,7 +264,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -296,10 +305,11 @@
 		};
 		DB441E89FB93E88762B76C81 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_C32863B2-B2E9-49AF-B5F4-C64F5D38812A" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_6906A720-AB7D-49A2-9D5B-27C974B4017D" /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
@@ -331,7 +341,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
