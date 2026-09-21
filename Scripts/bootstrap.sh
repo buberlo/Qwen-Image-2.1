@@ -12,3 +12,12 @@ if [ "$(git -C "$runtime" rev-parse HEAD)" != "$revision" ]; then
   exit 1
 fi
 git -C "$runtime" submodule update --init ggml
+
+# Local safety patch on the pinned ggml revision; never silently overwrite edits.
+patch_file="$PWD/Native/patches/ggml-metal-allocation-failure.patch"
+if git -C "$runtime/ggml" apply --reverse --check "$patch_file" 2>/dev/null; then
+  : # Already applied.
+else
+  git -C "$runtime/ggml" apply --check "$patch_file"
+  git -C "$runtime/ggml" apply "$patch_file"
+fi

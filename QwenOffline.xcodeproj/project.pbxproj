@@ -36,7 +36,7 @@
 		DB5E3BC1E639DABA9E63039E /* QwenOffline.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QwenOffline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CEC4C8FA002C94ABB5CB37 /* Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		F30F3A622CAAECDB339B52D1 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		"TEMP_125E9B03-37F1-4C0B-AE38-0BCCA7DEFB42" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_F4D30C26-BCE7-4FC0-86E6-941E45C8BCA0" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -92,10 +92,10 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		"TEMP_C636EEC5-E98B-4FD5-AFF1-105F9F0D94CA" /* Qwen-Image-2.1 */ = {
+		"TEMP_B619D24F-F504-4C7A-AF5F-E1986BFA21F5" /* Qwen-Image-2.1 */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_125E9B03-37F1-4C0B-AE38-0BCCA7DEFB42" /* Signing.xcconfig */,
+				"TEMP_F4D30C26-BCE7-4FC0-86E6-941E45C8BCA0" /* Signing.xcconfig */,
 			);
 			path = "Qwen-Image-2.1";
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 		};
 		9FC93A01A4008584A8CDE6AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_125E9B03-37F1-4C0B-AE38-0BCCA7DEFB42" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_F4D30C26-BCE7-4FC0-86E6-941E45C8BCA0" /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
@@ -264,7 +264,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -305,7 +305,7 @@
 		};
 		DB441E89FB93E88762B76C81 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_125E9B03-37F1-4C0B-AE38-0BCCA7DEFB42" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_F4D30C26-BCE7-4FC0-86E6-941E45C8BCA0" /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
@@ -341,7 +341,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

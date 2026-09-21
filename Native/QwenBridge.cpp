@@ -52,7 +52,7 @@ bool qi_load(qi_engine *e, qi_model_paths paths, bool editing) {
         p.backend = "metal";
         // iOS has unified memory. CPU offload alone cannot make these weights fit.
         p.params_backend = "disk";
-        p.max_vram = "3"; // Managed buffers only; NOT a total process memory limit.
+        p.max_vram = "1.5"; // Managed buffers only; NOT a total process memory limit.
         p.enable_mmap = true;
         p.disable_prefetch = true;
         p.eager_load = false;
@@ -120,7 +120,7 @@ bool qi_generate(qi_engine *e, const char *prompt, int64_t seed,
         if (reference_rgb) { p.ref_images = &reference; p.ref_images_count = 1; }
         bool ok = generate_image(e->context, &p, &images, &count);
         if (!ok || e->cancelled || count != 1 || !images || !images[0].data) {
-            e->error = e->cancelled ? "Cancelled" : "Generation failed. Inspect the device console.";
+            e->error = e->cancelled ? "Cancelled" : "Generation could not complete within the current runtime or memory limits. No image was produced; inspect the device console for the failing stage.";
             release(); return false;
         }
         auto &image = images[0];

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (4) — 2026-09-21
+
+- Handle failed Metal buffer allocations before dereferencing the result; release shared host memory on failure. Bootstrap reproducibly applies the local patch to pinned ggml.
+- Lower the managed-buffer budget from 3 GiB to 1.5 GiB; keep the exact model and quantization unchanged.
+- Diagnose two build 3 prompt-encoding crashes with sampled footprints around 2.6 GB. The user reports completed model download.
+- Nine core checks and the signed iOS Release build passed. Installed and launched over the personal app with model files retained. Successful generation and editing still require physical-device validation.
+
 ## 0.1.0 (3) — 2026-09-21
 
 ### Fixed

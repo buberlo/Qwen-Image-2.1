@@ -10,13 +10,14 @@ The app is named **Pocket Canvas**. The repository and internal Xcode target ret
 
 | Area | Verified status |
 | --- | --- |
-| Latest source and personal-device build | 0.1.0 (3), installed and launched on iPhone 16 |
+| Latest source and personal-device build | 0.1.0 (4), installed and launched on iPhone 16 |
 | Download crash fix | Checksum buffers now released after every 4 MiB chunk; existing partial downloads preserved |
 | Large-file regression | Valid 5 GiB checksum passed with 11.4 MiB peak RSS on the development Mac |
-| Full model installation and inference | Still awaiting physical-device completion and validation |
+| Full model installation | User reports download complete; all four installed files retained after update |
+| Inference | Two prompt-encoding crashes diagnosed; build 4 deployed for retry, no successful output yet |
 | App Store Connect | Build 2 attached to a direct App Store draft; not submitted or publicly available |
 
-**Build 2 still contains the checksum memory bug.** Build 3 must be archived, uploaded, and selected before App Review. TestFlight distribution is not part of the current release plan.
+**Build 2 still contains the checksum memory bug.** Build 4 or a later validated build must be archived, uploaded, and selected before App Review. TestFlight distribution is not part of the current release plan.
 
 If an older build closed near the first 4–5 GB of setup, update the same installed app and choose **Model → Download / resume model**. Do not delete the app or its model files: completed download chunks can be reused. Verification reads the saved file locally and is distinct from network downloading. Completing this regression does not establish that the image model fits in iPhone memory.
 
@@ -36,7 +37,7 @@ See the [changelog](CHANGELOG.md) for fixes and the [device acceptance procedure
 ## What is implemented
 
 - 512 × 512 RGB generation and one reference image with an edit prompt; 40 Euler steps, guidance 6, runtime-selected model schedule.
-- Native bridge to pinned `stable-diffusion.cpp` revision `c678dfe704a2230342376b46add9c8ca736a653d`. Metal execution with disk-backed parameters, mmap, segmented execution, prefetch disabled, tiled VAE decoding, and a 3 GiB managed-buffer budget.
+- Native bridge to pinned `stable-diffusion.cpp` revision `c678dfe704a2230342376b46add9c8ca736a653d`. Metal execution with disk-backed parameters, mmap, segmented execution, prefetch disabled, tiled VAE decoding, and a 1.5 GiB managed-buffer budget.
 - The managed budget is **not** an iOS process-memory limit. CPU offload is not used as a substitute for reducing residency in unified memory. Actual resident memory and iOS termination behavior must be measured.
 - Single-job serial execution, cross-thread cancellation, unloading after each result/failure, and invalidation of stale progress callbacks.
 - Manifest-pinned 4-bit diffusion and encoder files, F16 vision projection, and the matching BF16 VAE. File revisions, byte sizes, and SHA-256 digests are in `App/Resources/Models.json`.
@@ -70,6 +71,7 @@ Then build/run on the actual phone with your signing team. Simulator results can
 
 ## Known limits
 
+- Build 3 crashed during prompt encoding after a failed Metal allocation. Build 4 patches the null-buffer failure path and lowers the managed memory budget; successful generation remains unverified.
 - No successful real-model iPhone inference has been recorded. Do not treat this as a proven usable image generator yet.
 - Upstream model loading has no interruptible load API. Cancellation during loading is applied when loading returns; cancellation during encoding is also reasserted at the next sampler progress boundary. Never destroy an in-flight native context.
 - Background expiration requests cancellation, but iOS can suspend or terminate the app before native cleanup completes. The app does not advertise background generation.

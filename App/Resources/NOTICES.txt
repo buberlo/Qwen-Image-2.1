@@ -569,3 +569,5 @@ This is free and unencumbered software released into the public domain.
   OTHER DEALINGS IN THE SOFTWARE.
 
   For more information, please refer to <http://unlicense.org/>
+
+Local runtime modifications: Pocket Canvas patches the pinned ggml Metal allocator to return allocation failures without dereferencing a null buffer and to release host memory on a failed Metal allocation. Original license terms below/above remain applicable.

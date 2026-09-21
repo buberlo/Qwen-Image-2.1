@@ -7,7 +7,7 @@ Target: a free, non-commercial research/evaluation app submitted directly to App
 - App Store Connect app: https://appstoreconnect.apple.com/apps/6814293165
 - SKU: pocket-canvas-ios
 - Primary language: English (US)
-- Current source/personal-device build: 0.1.0 (3)
+- Current source/personal-device build: 0.1.0 (4)
 - Uploaded build selected in the App Store draft: 0.1.0 (2), superseded by the checksum fix; replace before review
 - Repository: https://github.com/buberlo/Qwen-Image-2.1
 - Privacy policy source: docs/PRIVACY.md
@@ -38,12 +38,12 @@ App Store Connect app 6814293165 was created. Xcode archive and upload succeeded
 
 The release route was changed to direct App Store submission. Version 0.1.0 has build 2 selected; export-compliance questions were completed based on the app using Apple-provided networking/cryptography. Support and repository URLs, copyright, no-login requirement, and factual review notes were saved. The app remains in preparation for submission. No TestFlight invitations were sent and no App Review submission was made.
 
-Build 3 fixes a confirmed checksum-memory problem and is installed on the original personal-device bundle ID. It has **not** been uploaded to App Store Connect. Do not submit the currently selected build 2.
+Build 4 includes the checksum-memory fix, handles a confirmed Metal null-buffer crash during prompt encoding, and lowers the managed-buffer budget. It is installed on the original personal-device bundle ID. It has **not** been uploaded to App Store Connect. Do not submit the currently selected build 2.
 
 Before submission:
 
 1. Confirm complete model installation, generation, and photo editing on the physical phone, including the acceptance suite and offline operation.
-2. Archive and upload build 3 or a later corrected build with `./Scripts/archive-beta.sh` (the script's historical name does not require TestFlight). Select that build in the App Store version and complete any new build questions.
+2. Archive and upload build 4 or a later validated build with `./Scripts/archive-beta.sh` (the script's historical name does not require TestFlight). Select that build in the App Store version and complete any new build questions.
 3. Supply genuine app screenshots, final accurate description/keywords, App Review contact email and phone, age rating, category, store privacy disclosures, and free pricing/availability.
 4. Reconcile the review notes with actual test results. Preserve the research/evaluation license scope; a zero price does not grant commercial-use rights.
 5. Submit to App Review. Public availability requires Apple's approval; an upload alone is not a release.

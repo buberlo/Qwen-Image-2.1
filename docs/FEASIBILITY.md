@@ -14,7 +14,7 @@
 
 The 7B diffusion model is only part of the pipeline. The runtime also requires Qwen3-VL-8B text encoding; editing uses its vision projection; decoding requires the Qwen-Image-2.1-specific VAE. All four components are pinned.
 
-The native wrapper explicitly chooses disk-backed parameter storage, mmap, segmented execution, and disables prefetch. This avoids assuming that moving GPU weights to CPU RAM solves unified-memory pressure. A 3 GiB managed-buffer budget leaves headroom in principle but cannot cap process footprint; actual graph/workspace residency, iOS memory allowance, and speed remain unknown. VAE tiles start at 256 pixels.
+The native wrapper explicitly chooses disk-backed parameter storage, mmap, segmented execution, and disables prefetch. This avoids assuming that moving GPU weights to CPU RAM solves unified-memory pressure. A 1.5 GiB managed-buffer budget (reduced from 3 GiB in build 4) leaves headroom in principle but cannot cap process footprint; actual graph/workspace residency, iOS memory allowance, and speed remain unknown. VAE tiles start at 256 pixels.
 
 Cancellation is cooperative. Upstream offers generation cancellation but no cancellable model-loading API. The wrapper retains native resources until work finishes, reapplies cancellation at progress boundaries, and releases the context before returning to Swift.
 
@@ -33,4 +33,12 @@ Phone Jetsam reports identified QwenOffline terminations with `per-process-limit
 
 The verifier now drains an autorelease pool after each 4 MiB read and hash update. A valid 5 GiB sparse-file checksum regression passed with 11.4 MiB peak RSS on this Mac, below its 128 MiB guard. This verifies bounded checksum memory, not inference feasibility. Existing model file names and resume offsets are unchanged.
 
-Run `./Scripts/check-checksum-memory.sh` to reproduce the large-file regression. A completed installation on the phone after the fix remains to be confirmed.
+Run `./Scripts/check-checksum-memory.sh` to reproduce the large-file regression. The user subsequently reported model download completion. All four installed component files were retained through the build 4 update.
+
+## Prompt-encoding allocation crash — build 4
+
+Two physical-device crash reports from build 3 show `EXC_BAD_ACCESS` at address `0x10` in `ggml_metal_buffer_is_shared`, called after a failed Metal allocation. The native stack places the failure in Qwen3-VL prompt encoding, before diffusion sampling. App diagnostics sampled peak footprints of approximately 2.61 GB and 2.62 GB, with about 0.92 GB of reported available process memory and nominal thermal state. These are sampled values, not exact peaks or proof of the allocation rejection's underlying cause.
+
+Build 4 checks the allocator result before dereferencing it and releases shared host memory when creating the Metal buffer fails. The reproducible patch is stored in `Native/patches/ggml-metal-allocation-failure.patch` and applied idempotently by bootstrap to the pinned ggml revision. The base runtime pin and model files are unchanged. The managed-buffer budget is reduced to 1.5 GiB to encourage smaller resident segments; this does not cap total process memory or prove the model fits.
+
+The signed iOS Release build and nine core checks passed. Build 4 was installed over the original personal-device app and launched. Retest generation and editing on the phone: neither successful inference nor graceful recovery from every possible allocation failure is established. Raw device reports remain private.

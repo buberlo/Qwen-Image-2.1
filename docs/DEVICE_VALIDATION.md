@@ -4,7 +4,7 @@ Target: standard iPhone 16, iOS 27. Use a signed Release build for measured runs
 
 ## Deployment record — 2026-09-21
 
-Signed Release app installed successfully over Wi-Fi on the paired iPhone 16 running iOS 27. `devicectl` confirmed launch; a subsequent process listing showed QwenOffline running (PID 14271). Full model installation and physical-device inference acceptance have not been confirmed.
+Signed Release app installed successfully over Wi-Fi on the paired iPhone 16 running iOS 27. `devicectl` confirmed launch; a subsequent process listing showed QwenOffline running (PID 14271). The user subsequently reported model download completion. Physical-device inference acceptance has not passed.
 
 The workspace is managed by a file provider, which reapplied FinderInfo metadata to the built app and prevented Xcode code signing. Deployment used a temporary copy outside the synced workspace (`ditto --norsrc --noextattr`), signed with the Xcode-selected development identity and generated entitlements. `codesign --verify --deep --strict` passed before installation. For future signed builds, use DerivedData outside the synced workspace.
 
@@ -17,6 +17,15 @@ The original personal installation was updated in place to build 3 and relaunche
 - Confirm all four files install and verify, with no iOS termination during either initial verification or verification after relaunch.
 - Observe physical memory during verification; compare stages rather than treating the download byte counter as RAM usage. Retain relevant Jetsam records privately.
 - The 5 GiB desktop regression guards against checksum buffer accumulation. Record phone measurements separately; it is not a substitute for a completed phone installation.
+
+## Build 4 inference retry
+
+Two build 3 generation attempts crashed during prompt encoding after a failed Metal allocation. Build 4 adds allocation-failure handling and lowers the managed-buffer budget to 1.5 GiB. It was installed and launched in place, retaining the model files.
+
+- Let startup verification finish, then try one text generation. Record whether it completes, reports an error, or terminates.
+- If an error is shown, verify cleanup and retry without restarting the app. Collect diagnostics and the native console before attributing all failures to the same cause.
+- If generation completes, inspect prompt-following and proceed to a reference-photo edit and the full suite below.
+- A successful launch or completed download does not establish inference feasibility.
 
 ## Build and installation
 
